@@ -9,13 +9,14 @@ from Level_01 import *
 class MyGame:
         
         pygame.init()
-        
+        '''
         def shift_world(self,shift_x,shift_y):
                 self.world_shift_x += shift_x
                 self.world_shift_y += shift_y
                 for each_object in self.active_object_list:#for each_object in MyGame.collideable_objects:
                         each_object.rect.x += shift_x
-                        each_object.rect.y += shift_y        
+                        each_object.rect.y += shift_y 
+        '''
         def DeathEvent(self):
         
                 MyFont = pygame.font.Font(None, 70)
@@ -48,7 +49,7 @@ class MyGame:
                 #self.active_object_list.add(player) 
                 self.collideable_objects.add(player)              
                 player.set_image('images/Luigi1.png')
-                player.set_position(25,-17)
+                #player.set_position(25,-30)
         
                 block = Block(27, 500, width=500, height=7)
                
@@ -59,16 +60,17 @@ class MyGame:
                 current_level_number = 0
                 current_level = level_list[current_level_number]
                 player.set_level(current_level)
-                player.set_image('images/Luigi1.png')
                 self.collideable_objects.add(self.active_object_list)
                 #Event Control
+                
                 while running:
+                        
                         for event in pygame.event.get():
                                 if event.type==pygame.QUIT:
                                         running=False
                                 if event.type==pygame.MOUSEMOTION:
                                         mousePos = event.pos #pygame.mouse.get_pos()
-                                        print('Mouse@: '+str(mousePos[0])+','+str(mousePos[1]))        
+                                        print('MousePos: '+str(mousePos[0])+','+str(mousePos[1]))        
                                 if event.type==pygame.KEYDOWN:
                                         if event.key == pygame.K_ESCAPE:
                                                 pygame.quit()
@@ -80,23 +82,25 @@ class MyGame:
                                                 player.hspeed+=5
                                         if event.key == pygame.K_SPACE:
                                                 player.vspeed=(player.vspeed-5)*2
+                                        if event.key == pygame.K_d:
+                                                self.DeathEvent()
                                         print(str(event.key))
                                 if event.type == MOUSEBUTTONDOWN:
                                         mousePos = event.pos
                                         player.set_position(mousePos[0],mousePos[1])
                                         player.update()
+                        
                         #End Event Control
                         
                         #----------------#
                         #update functions#
                         #----------------#
                         
-                        
                         #player.update(self.collideable_objects,event)
                         player.update(current_level.object_list,event)
                         event = None
                         current_level.update()
-                        player.scroll()
+                        #player.scroll()
                         #logic testing
                         
                         #draw everyhing

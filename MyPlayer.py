@@ -89,6 +89,7 @@ class MyPlayer(pygame.sprite.Sprite):
             if self.vspeed < 0:
                 self.rect.top = collided_object.rect.bottom
                 self.vspeed = 0
+        '''
         if not (event == None):
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
@@ -110,9 +111,9 @@ class MyPlayer(pygame.sprite.Sprite):
             if event.type == MOUSEMOTION:
                 mousePos = event.pos #pygame.mouse.get_pos()
                 print('Mouse: '+str(mousePos[0])+','+str(mousePos[1]))        
-                
-        if self.rect.y > 600:
-            print("You Died!")
+            '''
+        #if self.rect.y > 600:
+            #print("You Died!")
     def experience_gravity(self,gravity = .35):
         if self.vspeed == 0:
             self.vspeed = 1
